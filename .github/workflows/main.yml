@@ -1,0 +1,17 @@
+name: Build on macOS
+on: push
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Build
+        run: |
+          brew shellenv
+          alias brew='arch -arm64 brew'
+          brew update
+          brew install binwalk
+          find "$(brew --prefix)" -type f
+          arch
